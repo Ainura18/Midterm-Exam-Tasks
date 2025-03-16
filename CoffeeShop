@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class CoffeeShop {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to Coffee Shop!");
+        System.out.print("Choose your coffee (Espresso, Cappuccino, Latte): ");
+        String coffeeType = scanner.nextLine();
+
+        Coffee coffee = CoffeeFactory.createCoffee(coffeeType);
+
+        System.out.print("Do you want milk? (yes/no): ");
+        if (scanner.nextLine().equalsIgnoreCase("yes")) {
+            coffee = new MilkDecorator(coffee);
+        }
+
+        System.out.print("Do you want chocolate? (yes/no): ");
+        if (scanner.nextLine().equalsIgnoreCase("yes")) {
+            coffee = new ChocolateDecorator(coffee);
+        }
+
+        System.out.println("Your order: " + coffee.getDescription());
+        System.out.println("Total cost: $" + coffee.getCost());
+
+        scanner.close();
+    }
+}
+
